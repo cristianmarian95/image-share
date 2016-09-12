@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, nofollow">
+	<link rel="stylesheet" href="{{ base_url }}/assets/default/css/admin.css">
+	<title>AdminCP : {{ s.title }}</title>
+</head>
+<body>
+	<div class="header">
+		<a href="{{path_for('AdminHome')}}" class="brand">{{s.brand}}</a>
+		<a class="toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+	</div>
+	<div class="main-container">
+		<div class="sidebar">
+			<ul>
+				<li><a href="{{ path_for('AdminHome') }}" class="barnd">{{ s.brand }}</a></li>
+				<li><a href="{{ path_for('AdminHome') }}" class="active"><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</a></li>
+				<li><a href="{{ path_for('getAdminSeo') }}"><i class="fa fa-laptop" aria-hidden="true"></i> SEO</a></li>
+				<li><a href="{{ path_for('getAdminUpload') }}"><i class="fa fa-cloud-upload" aria-hidden="true"></i> Upload</a></li>
+				<li><a href="{{ path_for('getAdminReport') }}"><i class="fa fa-envelope" aria-hidden="true"></i> Reports</a></li>
+				<li><a href="{{ path_for('getHome')}}"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Back</a></li>
+				<li><a href="{{ path_for('getLogout')}}"><i class="fa fa-power-off" aria-hidden="true"></i> Logout</a></li>
+			</ul>
+		</div>
+		<div class="container-dash">
+			<div class="content-box container-fluid">
+				{% if user %}
+				<div class="pannel-title">
+					User: {{ user.username }}
+				</div>
+				<div class="container-box">
+					<form action="{{path_for('postAdminEdit')}}" method="post">
+						<div class="form-group">
+							<label>Username</label><input type="text" value="{{user.username}}" class="input-form" disabled>
+						</div>
+						<div class="form-group">
+							<label>Password</label><input type="password" value="abcdefgs" class="input-form" disabled>
+						</div>
+						<div class="form-group">
+							<label>Email</label><input type="text" value="{{user.email}}" class="input-form" disabled>
+						</div>
+						<div class="form-group">
+							<label>Uploaded Images</label><input type="text" value="{{imgs}}" class="input-form" disabled>
+						</div>
+						<div class="form-group">
+							<p>Last images uploaded</p>
+							{% if lasts %}
+								{% for img in lasts %}
+									<a href="{{path_for('getViewImage')}}/{{img.name}}"><img src="{{img.link}}"></a>
+								{% endfor %}
+							{% else %}
+								<div class="alert alert-info">No image found.</div>
+							{% endif %}
+						</div>
+					</form>
+				</div>
+				{% else %}
+				<div class="alert alert-info">
+					The user don't exists.
+				</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</body>
+</html>

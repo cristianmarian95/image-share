@@ -1,0 +1,60 @@
+{% include 'components/header.twig' %}
+{% include 'components/menu.twig' %}
+<h1 class="header-title">MyImages free easy and fast image hosting website</h1>
+<div class="header"></div>
+<!-- Modal Box Overlay -->
+<div class="sec-overlay" id="modal">
+	<!-- Modal Login -->
+	<div class="modal-box modal-small" id="modalLogin">
+		<!-- Modal Title -->
+		<div class="title">
+			<h2>Login to account</h2>
+		</div>
+		<form action="{{ path_for('postLogin') }}" method="post">
+			<!-- Modal Content -->
+			<div class="content">
+				<div class="form-group">
+					<lable for="username">Username</label>
+					<input type="text" name="username" class="form-input place-icon" id="username" placeholder="Enter your username">
+					<i class="fa fa-user icon" aria-hidden="true"></i>
+				</div>
+				<div class="form-group">
+					<lable for="password">Password</label>
+					<input type="password" name="password" class="form-input place-icon" id="password" placeholder="Enter your password">
+					<i class="fa fa-key icon" aria-hidden="true"></i>
+				</div>
+			</div>
+			<!-- Modal Footer -->
+			<div class="footer">
+				<button class="btn btn-info" type="submit"><i class="fa fa-lock" aria-hidden="true"></i> Login</button>
+				<a class="btn btn-success" href="{{ path_for('getRegister') }}"><i class="fa fa-user-plus" aria-hidden="true"></i> Register</a>
+				<a class="btn btn-danger right" data-close="modalLogin" data-toggle="dialog" data-action="close"><i class="fa fa-times" aria-hidden="true"></i> Close</a>
+			</div>
+		</form>
+	</div>
+		
+	<!-- Modal Upload -->
+	<div class="modal-box modal-upload" id="modalUpload">
+		<!-- Modal Title -->
+		<div class="title">
+			<h2>Upload you file</h2>
+		</div>
+		<!-- Modal Content -->
+		<div class="content">
+			<p id="alert" style="display:none;"></p>
+			<div class="draganddrop" id="dragAndDrop">
+				<i class="fa fa-cloud-upload upicon" id="upicon" aria-hidden="true"></i>
+				<p id="hide">Select or drag the image</p>
+				<p id="complete"><i class="fa fa-check" aria-hidden="true"></i></p>
+				<div class="uploadloader" id="spin"></div>
+				<span id="progress">0%</span>
+				<input type="file" id="file" name="files[]" style="display:none;">
+			</div>
+		</div>
+		<!-- Modal Footer -->
+		<div class="footer">
+			<button class="btn btn-danger center" data-close="modalUpload" data-toggle="dialog" data-action="close"><i class="fa fa-times" aria-hidden="true"></i> Close</button>
+		</div>
+	</div>
+</div>
+{% include 'components/bottom.twig' %}  

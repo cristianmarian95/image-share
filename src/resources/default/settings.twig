@@ -1,0 +1,77 @@
+{% include 'components/header.twig' %}
+{% include 'components/menu.twig' %}
+<div class="content container">
+	{% if flash.getMessage('error')[0] %}
+		<br />
+		<div class="alert alert-danger">
+			<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{ flash.getMessage('error')[0] }}
+		</div>
+	{% endif %}
+	{% if flash.getMessage('success')[0] %}
+		<br />
+		<div class="alert alert-success">
+			<i class="fa fa-check-circle" aria-hidden="true"></i> {{ flash.getMessage('success')[0] }}
+		</div>
+	{% endif %}
+	<h2>Change password</h2>
+	<form action="{{path_for('postUpdate')}}" method="post">
+		<div class="form-group">
+			<label for="password">New password</label>
+			<input type="password" name="newpass" class="form-input" id="password">
+		</div>
+		<div class="form-group">
+			<label for="password2">Confirm the new password</label>
+			<input type="password" name="repass" class="form-input" id="password2">
+		</div>
+		<div class="form-group">
+			<label for="password3">Old password</label>
+			<input type="password" name="pass" class="form-input" id="password3">
+		</div>
+		<div class="form-group">
+			<input type="hidden" value="pass" name="update">
+			<button type="submit" class="btn btn-success">Update password</button>
+		</div>
+	</form>
+	<h2>Change email</h2>
+	<form action="{{path_for('postUpdate')}}" method="post">
+		<div class="form-group">
+			<label for="email">New email address</label>
+			<input type="email" name="email" class="form-input" id="email" value="{{account.email}}">
+		</div>
+		<div class="form-group">
+			<label for="password">Current password</label>
+			<input type="password" name="pass" class="form-input" id="password">
+		</div>
+		<div class="form-group">
+			<input type="hidden" value="email" name="update">
+			<button type="submit" class="btn btn-success">Update email</button>
+		</div>
+	</form>
+</div>
+<!-- Modal Box Overlay -->
+<div class="sec-overlay" id="modal">
+	<!-- Modal Upload -->
+	<div class="modal-box modal-upload" id="modalUpload">
+		<!-- Modal Title -->
+		<div class="title">
+			<h2>Upload you file</h2>
+		</div>
+		<!-- Modal Content -->
+		<div class="content">
+			<p id="alert" style="display:none;"></p>
+			<div class="draganddrop" id="dragAndDrop">
+				<i class="fa fa-cloud-upload upicon" id="upicon" aria-hidden="true"></i>
+				<p id="hide">Select or drag the image</p>
+				<p id="complete"><i class="fa fa-check" aria-hidden="true"></i></p>
+				<div class="uploadloader" id="spin"></div>
+				<span id="progress">0%</span>
+				<input type="file" id="file" name="files[]" style="display:none;">
+			</div>
+		</div>
+		<!-- Modal Footer -->
+		<div class="footer">
+			<button class="btn btn-danger center" data-close="modalUpload" data-toggle="dialog" data-action="close"><i class="fa fa-times" aria-hidden="true"></i> Close</button>
+		</div>
+	</div>
+</div>
+{% include 'components/bottom.twig' %}

@@ -1,0 +1,29 @@
+body {
+	background: #efefef;
+}
+.box {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;
+	background: #FFF;
+	width: 450px;
+	border: 1px solid rgba(0,0,0,.1);
+	border-radius: 3px;
+}
+.box-title {
+	margin: 0;
+	padding: 10px 15px;
+	color: rgba(0,0,0,.6);
+	font-size: 24px;
+	font-weight: bold;
+	border-bottom: 1px solid rgba(0,0,0,.1);
+}
+.box-content {
+	padding: 15px;
+}
+.right {
+	float: right;
+	line-height: 40px;
+	color: #337ab7;
+	text-decoration: none;
+}

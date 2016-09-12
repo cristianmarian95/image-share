@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, nofollow">
+	<link rel="stylesheet" href="{{ base_url }}/assets/default/css/admin.css">
+	<title>AdminCP : {{ s.title }}</title>
+</head>
+<body>
+	<div class="header">
+		<a href="{{path_for('AdminHome')}}" class="brand">{{s.brand}}</a>
+		<a class="toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+	</div>
+	<div class="main-container">
+		<div class="sidebar">
+			<ul>
+				<li><a href="{{ path_for('AdminHome') }}" class="barnd">{{ s.brand }}</a></li>
+				<li><a href="{{ path_for('AdminHome') }}"><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</a></li>
+				<li><a href="{{ path_for('getAdminSeo') }}"><i class="fa fa-laptop" aria-hidden="true"></i> SEO</a></li>
+				<li><a href="{{ path_for('getAdminUpload') }}"><i class="fa fa-cloud-upload" aria-hidden="true"></i> Upload</a></li>
+				<li><a href="{{ path_for('getAdminReport') }}" class="active"><i class="fa fa-envelope" aria-hidden="true"></i> Reports</a></li>
+				<li><a href="{{ path_for('getHome')}}"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Back</a></li>
+				<li><a href="{{ path_for('getLogout')}}"><i class="fa fa-power-off" aria-hidden="true"></i> Logout</a></li>
+			</ul>
+		</div>
+		<div class="container-dash">
+			<div class="content-box container-fluid">
+				<div class="pannel-title">
+					Reports
+				</div>
+				{% if reports %}
+				<table>
+					<thead>
+						<tr>
+							<th>#ID</th>
+							<th>Username & Email</th>
+							<th>Link</th>
+							<th>Status</th>
+							<th>View</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for report in reports %}
+							<tr>
+								<td>{{ report.id }}</td>
+								<td>{{ report.email }}</td>
+								<td>{{url}}{{path_for('getViewImage')}}/{{ report.link }}</td>
+								<td>
+									{% if report.active == '1' %}
+									   	<div class="label label-success">Active</div>
+									{% else %}
+									    <div class="label label-danger">Closed</div> 
+									{% endif %}
+								</td>
+								<td>
+								  	<a href="{{ path_for('getAdminReport') }}/{{ report.id }}"><div class="label label-info">View Report</div></a>
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+				{% else %}
+				<div style="padding: 10px;">
+					<div class="alert alert-info">No report found.</div>
+				</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</body>
+</html>

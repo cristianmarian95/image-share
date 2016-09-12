@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, nofollow">
+	<link rel="stylesheet" href="{{ base_url }}/assets/default/css/admin.css">
+	<title>AdminCP : {{ s.title }}</title>
+</head>
+<body>
+	<div class="header">
+		<a href="{{path_for('AdminHome')}}" class="brand">{{s.brand}}</a>
+		<a class="toggle"><i class="fa fa-bars" aria-hidden="true"></i></a>
+	</div>
+	<div class="main-container">
+		<div class="sidebar">
+			<ul>
+				<li><a href="{{ path_for('AdminHome') }}" class="barnd">{{ s.brand }}</a></li>
+				<li><a href="{{ path_for('AdminHome') }}"><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</a></li>
+				<li><a href="{{ path_for('getAdminSeo') }}"><i class="fa fa-laptop" aria-hidden="true"></i> SEO</a></li>
+				<li><a href="{{ path_for('getAdminUpload') }}" class="active"><i class="fa fa-cloud-upload" aria-hidden="true"></i> Upload</a></li>
+				<li><a href="{{ path_for('getAdminReport') }}"><i class="fa fa-envelope" aria-hidden="true"></i> Reports</a></li>
+				<li><a href="{{ path_for('getHome')}}"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Back</a></li>
+				<li><a href="{{ path_for('getLogout')}}"><i class="fa fa-power-off" aria-hidden="true"></i> Logout</a></li>
+			</ul>
+		</div>
+		<div class="container-dash">
+			<div class="content-box container-fluid">
+				<div class="pannel-title">
+					Upload Settings
+				</div>
+				<div class="container-box">
+					{% if flash.getMessage('error')[0] %}
+						<div class="alert alert-danger">
+							<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{ flash.getMessage('error')[0] }}
+						</div>
+					{% endif %}
+					{% if flash.getMessage('success')[0] %}
+						<div class="alert alert-success">
+							<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{ flash.getMessage('success')[0] }}
+						</div>
+					{% endif %}
+					<form action="{{path_for('postAdminUpload')}}" method="post">
+						<div class="form-group">
+						<label>Max file size(MB)</label><input type="text" value="{{ s.max_file_size / 1000000 }}" class="input-form" name="size">
+						</div>
+						<div class="form-group">
+						<label>Allowed extensions</label><textarea class="input-form" name="ext" style="height:150px;">{{s.file_extensions}}</textarea>
+						</div>
+						<div class="form-group">
+							<button type="submit" class="btn btn-info">Save</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

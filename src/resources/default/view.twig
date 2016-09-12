@@ -1,0 +1,100 @@
+{% include 'components/header.twig' %}
+{% include 'components/menu.twig' %}
+{% for img in imgs %}
+<div class="content container">
+	{% if img %}
+	<div class="imgContent">
+		<div class="imageUploaded">
+			<img src="{{img.link}}">
+		</div>
+	</div>
+	<div class="imageSideBar">
+		<input type="text" class="getLink" value="{{url}}{{path_for('getViewImage')}}/{{img.name}}">
+		<div class="imageInfo">
+		<p class="uploader">Uploaded by: {{img.owner}}</p>
+		<p>
+			<a href="https://www.facebook.com/sharer/sharer.php?u={{url}}{{path_for('getViewImage')}}/{{img.name}}" target="_blank"><i class="fa fa-facebook-square social-icon-f" aria-hidden="true"></i></a>
+			<a href="https://twitter.com/intent/tweet?url={{url}}{{path_for('getViewImage')}}/{{img.name}}" target="_blank"><i class="fa fa-twitter-square social-icon-t" aria-hidden="true"></i> </a>
+			<a href="https://plus.google.com/share?url={{url}}{{path_for('getViewImage')}}/{{img.name}}" target="_blank"><i class="fa fa-google-plus-square social-icon-g" aria-hidden="true"></i> </a>
+			<a href="https://www.reddit.com/submit?title={{s.description}};url={{url}}{{path_for('getViewImage')}}/{{img.name}}" target="_blank"><i class="fa fa-reddit-square social-icon-g" aria-hidden="true"></i> </a>
+			<a href="https://pinterest.com/pin/create/button/?url={{url}}{{path_for('getViewImage')}}/{{img.name}}&media={{img.link}}&description={{ s.title }}"><i class="fa fa-pinterest-square social-icon-g" aria-hidden="true"></i></a>
+		
+		</p>
+			<p>
+				<a class="btn btn-warrning" href="{{url}}{{path_for('getReport')}}/{{img.name}}"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Report</a>
+			</p>
+			{% if img.oid == user %}
+			<p>
+				<a class="btn btn-danger" href="{{url}}{{path_for('getDelete')}}/{{img.name}}"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a>
+			</p>
+			{% elseif admin %}
+			<p>
+				<a class="btn btn-danger" href="{{url}}{{path_for('getDelete')}}/{{img.name}}"> <i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a>
+			</p>
+			{% endif %}
+		</div>
+	</div>
+	{% else %}
+	<br />
+	<div class="alert alert-info">
+		The image was not found or was deleted.
+	</div>
+	{% endif %}
+</div>
+<div class="clearfix"></div>
+{% endfor %}
+<!-- Modal Box Overlay -->
+<div class="sec-overlay" id="modal">
+<!-- Modal Login -->
+	<div class="modal-box modal-small" id="modalLogin">
+		<!-- Modal Title -->
+		<div class="title">
+			<h2>Login to account</h2>
+		</div>
+		<form action="{{ path_for('postLogin') }}" method="post">
+			<!-- Modal Content -->
+			<div class="content">
+				<div class="form-group">
+					<lable for="username">Username</label>
+					<input type="text" name="username" class="form-input place-icon" id="username" placeholder="Enter your username">
+					<i class="fa fa-user icon" aria-hidden="true"></i>
+				</div>
+				<div class="form-group">
+					<lable for="password">Password</label>
+					<input type="password" name="password" class="form-input place-icon" id="password" placeholder="Enter your password">
+					<i class="fa fa-key icon" aria-hidden="true"></i>
+				</div>
+			</div>
+			<!-- Modal Footer -->
+			<div class="footer">
+				<button class="btn btn-info" type="submit"><i class="fa fa-lock" aria-hidden="true"></i> Login</button>
+				<a class="btn btn-success" href="{{ path_for('getRegister') }}"><i class="fa fa-user-plus" aria-hidden="true"></i> Register</a>
+				<a class="btn btn-danger right" data-close="modalLogin" data-toggle="dialog" data-action="close"><i class="fa fa-times" aria-hidden="true"></i> Close</a>
+			</div>
+		</form>
+	</div>
+	<!-- Modal Upload -->
+	<div class="modal-box modal-upload" id="modalUpload">
+		<!-- Modal Title -->
+		<div class="title">
+			<h2>Upload you file</h2>
+		</div>
+		<!-- Modal Content -->
+		<div class="content">
+			<p id="alert" style="display:none;"></p>
+			<div class="draganddrop" id="dragAndDrop">
+				<i class="fa fa-cloud-upload upicon" id="upicon" aria-hidden="true"></i>
+				<p id="hide">Select or drag the image</p>
+				<p id="complete"><i class="fa fa-check" aria-hidden="true"></i></p>
+				<div class="uploadloader" id="spin"></div>
+				<span id="progress">0%</span>
+				<input type="file" id="file" name="files[]" style="display:none;">
+			</div>
+		</div>
+		<!-- Modal Footer -->
+		<div class="footer">
+			<button class="btn btn-danger center" data-close="modalUpload" data-toggle="dialog" data-action="close"><i class="fa fa-times" aria-hidden="true"></i> Close</button>
+		</div>
+	</div>
+</div>
+{% include 'components/bottom.twig' %}

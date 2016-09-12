@@ -1,0 +1,43 @@
+{% include 'components/header.twig' %}
+{% include 'components/menu.twig' %}
+<!-- Content -->
+<div class="container content">
+	<h2>My uploaded images</h2>
+	{% if images %}
+		{% for item in images %}
+			<div class="thumbnail">
+				<div class="loader"></div>
+				<a href="{{ path_for('getViewImage') }}/{{ item.name }}"><img src="{{ item.link }}" class="thumb"></a>
+			</div>
+		{% endfor %}
+	{% else %}
+		<div class="alert alert-info" id="alert"><i class="fa fa-info-circle" aria-hidden="true"></i> You dont have any image uploaded.</div>
+	{% endif %}
+</div>
+<!-- Modal Box Overlay -->
+<div class="sec-overlay" id="modal">
+	<!-- Modal Upload -->
+	<div class="modal-box modal-upload" id="modalUpload">
+		<!-- Modal Title -->
+		<div class="title">
+			<h2>Upload you file</h2>
+		</div>
+		<!-- Modal Content -->
+		<div class="content">
+			<p id="alert" style="display:none;"></p>
+			<div class="draganddrop" id="dragAndDrop">
+				<i class="fa fa-cloud-upload upicon" id="upicon" aria-hidden="true"></i>
+				<p id="hide">Select or drag the image</p>
+				<p id="complete"><i class="fa fa-check" aria-hidden="true"></i></p>
+				<div class="uploadloader" id="spin"></div>
+				<span id="progress">0%</span>
+				<input type="file" id="file" name="files[]" style="display:none;">
+			</div>
+		</div>
+		<!-- Modal Footer -->
+		<div class="footer">
+			<button class="btn btn-danger center" data-close="modalUpload" data-toggle="dialog" data-action="close"><i class="fa fa-times" aria-hidden="true"></i> Close</button>
+		</div>
+	</div>
+</div>
+{% include 'components/bottom.twig' %}

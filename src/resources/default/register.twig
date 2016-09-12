@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="eng">
+	<head>
+	    <meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta name="description" content="{{s.description}}">
+	    <meta name="keywords" content="{{s.keywords}}">
+	    <link rel="stylesheet" href="{{ url }}/assets/default/css/nexus.css">
+	    <link rel="stylesheet" href="{{ url }}/assets/default/css/auth.css">
+	    <title>{{s.title}} | Register</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="box">
+				<div class="box-title"><i class="fa fa-user-plus" aria-hidden="true"></i> Register</div>
+				<form action="{{ path_for('postRegister') }}" method="post" class="box-content">
+					{% if flash.getMessage('error')[0] %}
+						<div class="alert alert-danger">
+							<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{ flash.getMessage('error')[0] }}
+						</div>
+					{% endif %}
+					{% if flash.getMessage('success')[0] %}
+						<div class="alert alert-success">
+							<i class="fa fa-check-circle" aria-hidden="true"></i> {{ flash.getMessage('success')[0] }}
+						</div>
+					{% endif %}
+					<div class="form-group">
+						<label for="username" class="label">Username</label>
+						<input type="text" name="username" id="username" class="form-input" placeholder="Chose a username">
+					</div>
+					<div class="form-group">
+						<label for="password" class="label">Password</label>
+						<input type="password" name="password" id="password" class="form-input" placeholder="Chose a password">
+					</div>
+					<div class="form-group">
+						<label for="password2" class="label">Confirm password</label>
+						<input type="password" name="password2" id="password2" class="form-input" placeholder="Confirm password">
+					</div>
+					<div class="form-group">
+						<label for="email" class="label">Email</label>
+						<input type="email" name="email" id="email" class="form-input" placeholder="Enter your email address">
+					</div>
+					<div class="form-group">
+						<input type="checkbox" name="tos"> I aggree with <a href="{{ path_for('tos') }}">TOS</a>
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-info">Register</button>
+						<a href="{{ path_for('getLogin') }}" class="right">Have account?</a>
+					</div>
+				</form>
+			</div>
+		</div>
+		<script src="{{ url }}/assets/default/js/lib.js"></script>
+		<script src="{{ url }}/assets/default/js/nexus.js"></script>
+	</body>
+</html>
